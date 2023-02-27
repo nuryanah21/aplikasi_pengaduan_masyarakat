@@ -36,7 +36,23 @@ class PengaduanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+    		'tanggal_pengaduan' => 'required',
+    		'nik' => 'required',
+            'isi_laporan' => 'required',
+            'foto' => 'required',
+            'status' => 'required'
+    	]);
+ 
+        Pengaduan::create([
+    		'tanggal_pengaduan' => $request->tanggal_pengaduan,
+    		'nik' => $request->nik,
+            'isi_laporan' => $request->isi_laporan,
+            'foto' => $request->foto,
+            'status' => $request->status,
+    	]);
+ 
+    	return redirect('/pengaduan');
     }
 
     /**
@@ -58,7 +74,8 @@ class PengaduanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pengaduan = Pengaduan::where('id_pengaduan',$id)->first();
+        return view('pengaduan.edit', compact('pengaduan'));
     }
 
     /**
@@ -70,7 +87,23 @@ class PengaduanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+    		'tanggal_pengaduan' => 'required',
+    		'nik' => 'required',
+            'isi_laporan' => 'required',
+            'foto' => 'required',
+            'status' => 'required'
+    	]);
+ 
+        Pengaduan::where('id_pengaduan', $id)->update([
+    		'tanggal_pengaduan' => $request->tanggal_pengaduan,
+    		'nik' => $request->nik,
+            'isi_laporan' => $request->isi_laporan,
+            'foto' => $request->foto,
+            'status' => $request->status,
+    	]);
+ 
+    	return redirect('/pengaduan');
     }
 
     /**
@@ -79,8 +112,9 @@ class PengaduanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        Pengaduan::where('id_pengaduan',$id)->delete();
+        return redirect('/pengaduan');
     }
 }

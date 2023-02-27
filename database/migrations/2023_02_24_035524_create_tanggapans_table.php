@@ -14,11 +14,11 @@ class CreateTanggapansTable extends Migration
     public function up()
     {
         Schema::create('tanggapans', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('pengaduan_id')->references('id')->on('pengaduans');
+            $table->bigIncrements('id_tanggapan');
+            $table->unsignedBigInteger('id_pengaduan')->references('id_pengaduan')->on('pengaduans');
             $table->date('tanggal_tanggapan');
             $table->string('tanggapan');
-            $table->unsignedBigInteger('petugas_id')->references('id')->on('petugas');
+            $table->unsignedBigInteger('id_petugas')->references('id_petugas')->on('petugas');
             $table->timestamps();
         });
     }

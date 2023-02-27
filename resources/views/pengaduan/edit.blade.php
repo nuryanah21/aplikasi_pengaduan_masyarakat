@@ -10,20 +10,22 @@
         <div class="container">
             <div class="card mt-5">
                 <div class="card-header text-center">
-                    Masukkan Pengaduan
+                    Ubah Pengaduan
                 </div>
                 <div class="card-body">
                     <a href="/pengaduan" class="btn btn-primary">Kembali</a>
                     <br/>
                     <br/>
                     
-                    <form method="post" action="/pengaduan/store">
+ 
+                    <form method="post" action="/pengaduan/update/{{ $pengaduan->id_pengaduan }}">
  
                         {{ csrf_field() }}
+                        {{ method_field('PUT') }}
  
                         <div class="form-group">
                             <label>Tanggal Pengaduan</label>
-                            <input type="datetime-local" name="tanggal_pengaduan" class="form-control">
+                            <input type="datetime-local" name="tanggal_pengaduan" class="form-control" placeholder="Tanggal Pengaduan pengaduan .." value="{{ $pengaduan->tanggal_pengaduan }}">
  
                             @if($errors->has('tanggal_pengaduan'))
                                 <div class="text-danger">
@@ -32,10 +34,10 @@
                             @endif
  
                         </div>
-                        
+
                         <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" name="nik" class="form-control" placeholder="Nama Pengadu ..">
+                            <input type="text" name="nik" class="form-control" placeholder="nama pengaduan .." value="{{ $pengaduan->nik }}">
  
                             @if($errors->has('nik'))
                                 <div class="text-danger">
@@ -47,7 +49,7 @@
  
                         <div class="form-group">
                             <label>Laporan</label>
-                            <textarea name="isi_laporan" class="form-control" placeholder="isi laporan .."></textarea>
+                            <textarea name="isi_laporan" class="form-control" placeholder="isi laporan pengaduan ..">{{ $pengaduan->isi_laporan }}</textarea>
  
                              @if($errors->has('isi_laporan'))
                                 <div class="text-danger">
@@ -59,7 +61,7 @@
 
                         <div class="form-group">
                             <label>Foto</label>
-                            <input type="file" name="foto" class="form-control">
+                            <input type="file" name="foto" class="form-control" value="{{ $pengaduan->foto }}">
  
                             @if($errors->has('foto'))
                                 <div class="text-danger">

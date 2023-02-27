@@ -10,30 +10,30 @@
         <div class="container">
             <div class="card mt-5">
                 <div class="card-header text-center">
-                    Pengaduan Masyarakat
+                    Tanggapan
                 </div>
                 <div class="card-body">
-                    <a href="/pengaduan/create" class="btn btn-primary">Laporkan Masalah Anda</a>
+                    <a href="/tanggapan/create" class="btn btn-primary">Berikan Tanggapan</a>
                     <br/>
                     <br/>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
-                                <th>Tanggal Pengaduan</th>
-                                <th>NIK</th>
-                                <th>Alamat</th>
+                                <th>Pengadu</th>
+                                <th>Tanggal Tanggapan</th>
+                                <th>Tanggapan</th>
                                 <th>OPSI</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($pengaduan as $p)
+                            @foreach($tanggapan as $t)
                             <tr>
-                                <td>{{ $p->tanggal_pengaduan }}</td>
-                                <td>{{ $p->nik }}</td>
-                                <td>{{ $p->isi_laporan }}</td>
+                                <td>{{ $t->id_pengaduan }}</td>
+                                <td>{{ $t->tanggal_tanggapan }}</td>
+                                <td>{{ $t->tanggapan }}</td>
                                 <td>
-                                    <a href="/pengaduan/edit/{{ $p->id_pengaduan }}" class="btn btn-warning">Edit</a>
-                                    <a href="/pengaduan/delete/{{ $p->id_pengaduan }}" class="btn btn-danger">Hapus</a>
+                                    <a href="/tanggapan/edit/{{ $t->id_tanggapan }}" class="btn btn-warning">Edit</a>
+                                    <a href="/tanggapan/delete/{{ $t->id_tanggapan }}" class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
                             @endforeach
