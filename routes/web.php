@@ -37,3 +37,7 @@ Route::post('/tanggapan/store', 'TanggapanController@store');
 Route::get('/tanggapan/edit/{id}', 'TanggapanController@edit');
 Route::put('/tanggapan/update/{id}', 'TanggapanController@update');
 Route::get('/tanggapan/delete/{id}', 'TanggapanController@delete');
+
+Route::get('/landingpage', 'LandingpageController@index')->name('landingpage');
+Route::get('/halamandepan', 'DashboardController@index')->name('dashboard');
+

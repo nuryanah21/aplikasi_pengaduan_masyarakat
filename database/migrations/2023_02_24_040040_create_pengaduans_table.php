@@ -18,7 +18,7 @@ class CreatePengaduansTable extends Migration
             $table->date('tanggal_pengaduan');
             $table->unsignedBigInteger('nik')->references('nik')->on('masyarakats');
             $table->text('isi_laporan');
-            $table->string('foto');
+            $table->string('file');
             $table->enum('status', ['0', 'proses', 'selesai']);
             $table->timestamps();
         });

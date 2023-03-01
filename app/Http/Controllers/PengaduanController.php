@@ -40,15 +40,18 @@ class PengaduanController extends Controller
     		'tanggal_pengaduan' => 'required',
     		'nik' => 'required',
             'isi_laporan' => 'required',
-            'foto' => 'required',
+            'file' => 'required',
             'status' => 'required'
     	]);
+        
+        $imgName = $request->file->getClientOriginalName() . '-' . time() . '.' . $request->file->extension();
+        $request->file->move(public_path('image'), $imgName);
  
         Pengaduan::create([
     		'tanggal_pengaduan' => $request->tanggal_pengaduan,
     		'nik' => $request->nik,
             'isi_laporan' => $request->isi_laporan,
-            'foto' => $request->foto,
+            'file' => $imgName,
             'status' => $request->status,
     	]);
  
@@ -91,7 +94,7 @@ class PengaduanController extends Controller
     		'tanggal_pengaduan' => 'required',
     		'nik' => 'required',
             'isi_laporan' => 'required',
-            'foto' => 'required',
+            'file' => 'required',
             'status' => 'required'
     	]);
  
@@ -99,7 +102,7 @@ class PengaduanController extends Controller
     		'tanggal_pengaduan' => $request->tanggal_pengaduan,
     		'nik' => $request->nik,
             'isi_laporan' => $request->isi_laporan,
-            'foto' => $request->foto,
+            'file' => $request->file,
             'status' => $request->status,
     	]);
  
