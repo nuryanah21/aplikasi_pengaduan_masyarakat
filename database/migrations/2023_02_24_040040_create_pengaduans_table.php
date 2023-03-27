@@ -13,13 +13,13 @@ class CreatePengaduansTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengaduans', function (Blueprint $table) {
-            $table->bigIncrements('id_pengaduan');
-            $table->date('tanggal_pengaduan');
-            $table->unsignedBigInteger('nik')->references('nik')->on('masyarakats');
+        Schema::create('pengaduan', function (Blueprint $table) {
+            $table->increments('id_pengaduan');
+            $table->dateTime('tanggal_pengaduan');
+            $table->char('nik');
             $table->text('isi_laporan');
             $table->string('file');
-            $table->enum('status', ['0', 'proses', 'selesai']);
+            $table->enum('status', ['0','proses','selesai']);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreatePengaduansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengaduans');
+        Schema::dropIfExists('pengaduan');
     }
 }

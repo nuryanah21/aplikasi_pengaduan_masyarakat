@@ -1,91 +1,101 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
-        <title>Pengaduan Masyarakat</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="card mt-5">
-                <div class="card-header text-center">
-                    Edit Pengaduan
-                </div>
-                <div class="card-body">
-                    <a href="/pengaduan" class="btn btn-primary">Kembali</a>
-                    <br/>
-                    <br/>
-                    
- 
-                    <form method="post" action="/pengaduan/update/{{ $pengaduan->id_pengaduan }}">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>Pengaduan Edit</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+<!-- Favicon -->
+<link href="img/favicon.ico" rel="icon">
+
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Icon Font Stylesheet -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Libraries Stylesheet -->
+<link href="{{ asset('dashmin/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet') }}">
+<link href="{{ asset('dashmin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet') }}" />
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="{{ asset('dashmin/css/bootstrap.min.css') }}" rel="stylesheet">
+
+<!-- Template Stylesheet -->
+<link href="{{ asset('dashmin/css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        @include('template.sidebar')
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+
+            <!-- Navbar Start -->
+            @include('template.navbar')
+            <!-- Navbar End -->
+
+        <div class="container-fluid pt-4 px-4">
+            <div class="col-12">
+                <h6 class="mb-4">Edit Pengaduan</h6>
+                <div class="bg-light rounded h-100 p-4">
+                    <form action="/pengaduan/update/{{ $pengaduan->id_pengaduan }}" method="POST" enctype="multipart/form-data">
  
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
  
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label>Tanggal Pengaduan</label>
-                            <input type="datetime-local" name="tanggal_pengaduan" class="form-control" placeholder="Tanggal Pengaduan pengaduan .." value="{{ $pengaduan->tanggal_pengaduan }}">
- 
-                            @if($errors->has('tanggal_pengaduan'))
-                                <div class="text-danger">
-                                    {{ $errors->first('tanggal_pengaduan')}}
-                                </div>
-                            @endif
- 
+                            <input type="datetime-local" name="tanggal_pengaduan" class="form-control" value="{{ $pengaduan->tanggal_pengaduan }}">
                         </div>
 
-                        <div class="form-group">
-                            <label>Nama</label>
-                            <input type="text" name="nik" class="form-control" placeholder="nama pengaduan .." value="{{ $pengaduan->nik }}">
- 
-                            @if($errors->has('nik'))
-                                <div class="text-danger">
-                                    {{ $errors->first('nik')}}
-                                </div>
-                            @endif
- 
+                        <div class="mb-3">
+                            <label>NIK</label>
+                            <input type="number" name="nik" class="form-control" value="{{ $pengaduan->nik }}">
                         </div>
  
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label>Laporan</label>
-                            <textarea name="isi_laporan" class="form-control" placeholder="isi laporan pengaduan ..">{{ $pengaduan->isi_laporan }}</textarea>
- 
-                             @if($errors->has('isi_laporan'))
-                                <div class="text-danger">
-                                    {{ $errors->first('isi_laporan')}}
-                                </div>
-                            @endif
- 
+                            <textarea name="isi_laporan" class="form-control" value="{{ $pengaduan->isi_laporan }}"></textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label>Foto</label>
-                            <input type="file" name="file" class="form-control" value="{{ $pengaduan->file }}">
- 
-                            @if($errors->has('file'))
-                                <div class="text-danger">
-                                    {{ $errors->first('file')}}
-                                </div>
-                            @endif
- 
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Foto</label>
+                            <input name="file" class="form-control" type="file" value="{{ $pengaduan->file }}">
                         </div>
 
-                        <div class="form-group">
-                            <label>Status</label>
-                            <input type="radio" name="status" value="0"> 0
-                            <input type="radio" name="status" value="proses"> Proses
-                            <input type="radio" name="status" value="selesai"> Selesai
-
-                            @if($errors->has('foto'))
-                                <div class="text-danger">
-                                    {{ $errors->first('foto')}}
-                                </div>
-                            @endif
+                        <div class="mb-3">
+                            <label for="example-text-input" class="form-control-label">Status</label>
+                            <select class="form-control" name="status">
+                                <option selected="{{$pengaduan->status}}">{{$pengaduan->status}}</option>
+                                <option value="proses">Proses</option>
+                                <option value="selesai">Selesai</option>
+                            </select>
                         </div>
  
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-success" value="Simpan">
+                        <div class="mb-3">
+                            <input type="submit" class="btn btn-sm btn-success m-2" value="Simpan">
+                            <a href="/pengaduan" class="btn btn-sm btn-primary m-2">Kembali</a>
                         </div>
  
                     </form>
@@ -93,5 +103,25 @@
                 </div>
             </div>
         </div>
-    </body>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('dashmin/lib/chart/chart.min.js') }}"></script>
+    <script src="{{ asset('dashmin/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('dashmin/lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ asset('dashmin/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('dashmin/lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ asset('dashmin/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ asset('dashmin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+    <!-- Template Javascript -->
+    @include('template.script')
+</body>
 </html>

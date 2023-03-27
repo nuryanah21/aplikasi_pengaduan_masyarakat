@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'nik', 'nama', 'email','email_verified_at','password', 'telp', 'jenkel', 'level', 'alamat', 'rt', 'rw', 'kode_pos', 'province_id', 'regency_id', 'district_id', 'village_id'
     ];
 
     /**
@@ -36,4 +36,37 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function pengaduan() {
+        return $this->hasMany('App\Pengaduan', 'nik', 'nik');
+    }
+
+
+    public function tanggapan() {
+        return $this->hasMany('App\Tanggapan');
+    }
+
+    public function province()
+    {
+        return $this->belongsTo('App\Models\Province');
+    }
+
+
+    public function regency()
+    {
+        return $this->belongsTo('App\Models\Regency');
+    }
+
+
+    public function district()
+    {
+        return $this->belongsTo('App\Models\District');
+    }
+
+
+    public function village()
+    {
+        return $this->belongsTo('App\Models\Village');
+    }
+
 }

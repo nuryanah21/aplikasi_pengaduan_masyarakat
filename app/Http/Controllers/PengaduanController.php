@@ -4,120 +4,126 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pengaduan;
+use App\Tanggapan;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class PengaduanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // index pengaduan admin
     public function index()
     {
         $pengaduan = Pengaduan::all();
         return view('pengaduan.index', compact('pengaduan'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // create masyarakat
     public function create()
     {
-        return view('pengaduan.create');
+        $pengaduan = Pengaduan::all();
+        return view('masyarakat.create', compact('pengaduan'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // store masyarakat
     public function store(Request $request)
     {
         $this->validate($request,[
-    		'tanggal_pengaduan' => 'required',
-    		'nik' => 'required',
             'isi_laporan' => 'required',
             'file' => 'required',
-            'status' => 'required'
     	]);
         
         $imgName = $request->file->getClientOriginalName() . '-' . time() . '.' . $request->file->extension();
         $request->file->move(public_path('image'), $imgName);
- 
+
         Pengaduan::create([
-    		'tanggal_pengaduan' => $request->tanggal_pengaduan,
-    		'nik' => $request->nik,
+    		'tanggal_pengaduan' => date('Y-m-d H:i:s'),
+    		'nik' => Auth::user()->nik,
             'isi_laporan' => $request->isi_laporan,
             'file' => $imgName,
-            'status' => $request->status,
+            'status' => '0'
     	]);
  
-    	return redirect('/pengaduan');
+    	return redirect('/masyarakat/create')->with('Data ditambah','Laporan berhasil dikirim');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // ubah status admin
+    public function statusOnchange($id)
+    {    
+        $pengaduan = Pengaduan::with('user')->find($id);
+        $pengaduan->status = request()->get('status');
+        $pengaduan->save();
+        return redirect()->back();
+    }
+
+    // public function statusOnchange1($id){    
+    //     $pengaduan = Pengaduan::with('user')->find($id);
+    //     $pengaduan->status = request()->get('status');
+    //     $pengaduan->save();
+    //     return redirect()->back();
+    // }
+
+    // detail pengaduan admin
     public function show($id)
     {
-        //
+        $pengaduan = Pengaduan::where('id_pengaduan', $id)->first();
+
+        $data_tanggapan = Tanggapan::whereHas('pengaduan', function($query){
+            $query->where('id_pengaduan', request()->route('id'));
+        })->with('user')->first();
+
+        return view('pengaduan.show', compact('pengaduan', 'data_tanggapan'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // detail pengaduan masyarakat
+    // public function showMasyarakat($id)
+    // {
+        // $pengaduan = Pengaduan::with(['pengaduan', 'user'])->findOrFail($id);
+
+        // $tanggapan = Tanggapan::where('id_pengaduan',$id)->first();
+
+        // return view('masyarakat.masyarakatdetail', compact('pengaduan', 'tanggapan'));
+    // }
+
     public function edit($id)
     {
         $pengaduan = Pengaduan::where('id_pengaduan',$id)->first();
         return view('pengaduan.edit', compact('pengaduan'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-    		'tanggal_pengaduan' => 'required',
-    		'nik' => 'required',
-            'isi_laporan' => 'required',
-            'file' => 'required',
-            'status' => 'required'
+            'tanggapan' => 'required'
     	]);
- 
-        Pengaduan::where('id_pengaduan', $id)->update([
-    		'tanggal_pengaduan' => $request->tanggal_pengaduan,
-    		'nik' => $request->nik,
-            'isi_laporan' => $request->isi_laporan,
-            'file' => $request->file,
-            'status' => $request->status,
-    	]);
- 
-    	return redirect('/pengaduan');
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+        Tanggapan::where('id_pengaduan', $id)->update([
+    		'tanggapan' => $request->tanggapan
+    	]);
+ 
+    	return redirect()->back();
+    }
+    
+    // hapus pengaduan admin
     public function delete($id)
     {
         Pengaduan::where('id_pengaduan',$id)->delete();
-        return redirect('/pengaduan');
+        return redirect('/pengaduan')->with('Data dihapus','Data berhasil dihapus!');
+    }
+
+    // laporan masyarakat
+        
+    public function laporanku()
+    {
+        $pengaduan = Auth()->user()->pengaduan;
+        return view('masyarakat.laporanku', compact('pengaduan'));
+    }
+
+    public function showlaporanku($id)
+    {
+        $showlaporanku = Pengaduan::with('user')->find($id);
+        $data_tanggapan = Tanggapan::whereHas('pengaduan', function($query){
+            $query->where('id_pengaduan', request()->route('id'));
+        })->with('user')->first();
+        return view('/masyarakat/showlaporanku', compact('showlaporanku','data_tanggapan'));
     }
 }

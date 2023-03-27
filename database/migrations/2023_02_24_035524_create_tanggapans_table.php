@@ -13,12 +13,12 @@ class CreateTanggapansTable extends Migration
      */
     public function up()
     {
-        Schema::create('tanggapans', function (Blueprint $table) {
-            $table->bigIncrements('id_tanggapan');
-            $table->unsignedBigInteger('id_pengaduan')->references('id_pengaduan')->on('pengaduans');
-            $table->date('tanggal_tanggapan');
-            $table->string('tanggapan');
-            $table->unsignedBigInteger('id_petugas')->references('id_petugas')->on('petugas');
+        Schema::create('tanggapan', function (Blueprint $table) {
+            $table->increments('id_tanggapan');
+            $table->integer('id_pengaduan');
+            $table->dateTime('tanggal_tanggapan');
+            $table->text('tanggapan');
+            $table->integer('id')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateTanggapansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tanggapans');
+        Schema::dropIfExists('tanggapan');
     }
 }
