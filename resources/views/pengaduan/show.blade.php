@@ -4,7 +4,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Pengaduan Detail</title>
+<title>Pengaduan Detail | Pengaduan Masyarakat</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -104,25 +104,20 @@
                 @endforeach
                         </div>
                         <br>
-                        <div class="d-flex">
-                        <form action="{{ route('pengaduan.statusOnchange', $pengaduan->id_pengaduan)}}" method="post">
-                        @csrf
-                            <select name="status" class="form-select" onchange="javascript:this.form.submit()">
-                                <option value="0" @if($pengaduan->status == 0) selected @endif>Pending</option>
-                                <option value="proses" @if($pengaduan->status == "proses") selected @endif>Proses</option>
-                                <option value="selesai" @if($pengaduan->status == "selesai") selected @endif>Selesai</option>
-                            </select>
-                        </form>
-                        </div>
-                        <br>
+                        {{-- <div class="d-flex"> --}}
+                        {{-- <form action="{{ route('pengaduan.statusOnchange', $pengaduan->id_pengaduan)}}" method="post"> --}}
+                        {{-- @csrf --}}
+                            {{-- <select name="status" class="form-select" onchange="javascript:this.form.submit()"> --}}
+                                {{-- <option value="0" @if($pengaduan->status == 0) selected @endif>Pending</option> --}}
+                                {{-- <option value="proses" @if($pengaduan->status == "proses") selected @endif>Proses</option> --}}
+                                {{-- <option value="selesai" @if($pengaduan->status == "selesai") selected @endif>Selesai</option> --}}
+                            {{-- </select> --}}
+                        {{-- </form> --}}
+                        {{-- </div> --}}
+                        <a href="/pengaduan" class="btn btn-sm btn-outline-secondary m-2">Kembali</a>
                         <div class="col-lg-4 col-md-6">
                             <div class="mt-3">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-sm btn-success m-2" data-bs-toggle="modal" data-bs-target="#modalCenter">
-                                Tanggapi
-                                </button>
-                                <a href="/pengaduan" class="btn btn-sm btn-outline-secondary m-2">Kembali</a>
-
+        
                                 <!-- Modal -->
                                 <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -169,9 +164,9 @@
                     @endif
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-sm btn-success m-2" data-bs-toggle="modal" data-bs-target="#modal">
+                {{-- <button type="button" class="btn btn-sm btn-success m-2" data-bs-toggle="modal" data-bs-target="#modal">
                     Edit Tanggapan
-                </button>
+                </button> --}}
                 
                 <!-- Modal -->
                 <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">

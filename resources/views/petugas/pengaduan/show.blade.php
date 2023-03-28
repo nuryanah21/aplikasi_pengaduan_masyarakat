@@ -4,7 +4,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Pengaduan Detail</title>
+<title>Pengaduan Detail | Pengaduan Masyarakat</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -158,7 +158,11 @@
             <div class="col-12">
                 <h6 class="mb-4">Tanggapan</h6>
                 <div class="bg-light rounded h-100 p-4">
-                    <p>{{ @$data_tanggapan->tanggapan }}</p>
+                    @if (empty(@$data_tanggapan->tanggapan))
+                    Belum ada tanggapan
+                    @else
+                    {{@$data_tanggapan->tanggapan}}
+                    @endif
 
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-sm btn-success m-2" data-bs-toggle="modal" data-bs-target="#modal">

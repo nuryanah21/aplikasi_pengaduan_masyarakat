@@ -99,6 +99,7 @@
                             @endif
                     </div>   
                 </div>
+                <a href="/masyarakat/laporanku" class="btn btn-sm btn-outline-secondary m-2">Kembali</a>
             </div>
             <div class="container-fluid pt-4 px-4">
             <div class="col-12">

@@ -17,7 +17,7 @@ class PetugasController extends Controller
         return view('petugas.pengaduan.index', compact('pengaduan'));
     }
 
-    public function statusOnchange($id){    
+    public function statusOnchange1($id){    
         $pengaduan = Pengaduan::with('user')->find($id);
         $pengaduan->status = request()->get('status');
         $pengaduan->save();
