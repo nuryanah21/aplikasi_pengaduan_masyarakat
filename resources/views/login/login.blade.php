@@ -55,7 +55,7 @@
                     @endif
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                                <h3 class="text-primary">Layanan Pengaduan Masyarakat Online</h3>
+                                <h3 class="text-primary">Layanan Pengaduan Masyarakat</h3>
                             </a>
                             {{-- <h5>Sign In</h5> --}}
                         </div>

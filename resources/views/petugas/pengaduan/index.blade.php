@@ -73,7 +73,7 @@
                                 <br>
                                 <th>No</th>
                                 <th>Tanggal Pengaduan</th>
-                                <th>Nama</th>
+                                <th>Nama Pelapor</th>
                                 <th>Laporan</th>
                                 <th>Status</th>
                                 <th>OPSI</th>
@@ -97,7 +97,7 @@
                                 </td>
                                 <td>
                                     <a href="/petugas/pengaduan/show/{{ $p->id_pengaduan }}" class="btn btn-sm btn-square btn-warning m-2"><i class="fa fa-eye"></i></a>
-                                    <a href="/petugas/pengaduan/delete/{{ $p->id_pengaduan }}" class="btn btn-sm btn-square btn-danger m-2" onClick="return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                                    <!-- <a href="/petugas/pengaduan/delete/{{ $p->id_pengaduan }}" class="btn btn-sm btn-square btn-danger m-2" onClick="return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a> -->
                                 </td>
                               </tr>
                               @endforeach
