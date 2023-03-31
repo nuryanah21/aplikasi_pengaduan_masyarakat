@@ -36,7 +36,7 @@ class PengaduanController extends Controller
         $request->file->move(public_path('image'), $imgName);
 
         Pengaduan::create([
-    		'tanggal_pengaduan' => date('Y-m-d H:i:s'),
+    		'tanggal_pengaduan' => date('Y-m-d'),
     		'nik' => Auth::user()->nik,
             'isi_laporan' => $request->isi_laporan,
             'file' => $imgName,

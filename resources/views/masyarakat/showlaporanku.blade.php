@@ -106,9 +106,9 @@
                 <h6 class="mb-4">Tanggapan</h6>
                 <div class="bg-light rounded h-100 p-4">
                     @if (empty(@$data_tanggapan->tanggapan))
-                    <h6>Belum ada tanggapan</h6>
+                    Belum ada tanggapan
                     @else
-                    <h6>{{@$data_tanggapan->tanggapan}}</h6>
+                    {{@$data_tanggapan->tanggapan}}
                     @endif
                 </div>
             </div>

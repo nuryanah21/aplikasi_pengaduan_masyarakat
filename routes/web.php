@@ -69,6 +69,11 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() {
     Route::put('/tanggapan/update/{id}', 'TanggapanController@update');
     Route::get('/tanggapan/delete/{id}', 'TanggapanController@delete');
 
+    //tampildata masyarakat
+    Route::get('/user', 'UserController@indexx')->name('user');
+    Route::get('/user/show/{id}', 'UserController@showw');
+    Route::get('/user/delete/{id}', 'UserController@delete');
+
     
 });
 
@@ -103,7 +108,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:masyarakat']], function() {
 
 });
 
-Route::get('/user', 'UserController@index')->name('user');
 
 
 

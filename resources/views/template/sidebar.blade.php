@@ -47,11 +47,14 @@
                     @if (auth()->user()->level == "admin")
                     <a href="/pengaduan" class="nav-item nav-link {{ e($__env->yieldContent('menu')) == 'pengaduan' ? 'active' : '' }}"><i class="fa fa-table me-2"></i>Pengaduan</a>
                     @endif
+                    @if (auth()->user()->level == "admin")
+                    <a href="/user" class="nav-item nav-link {{ e($__env->yieldContent('menu')) == 'user' ? 'active' : '' }}"><i class="fa fa-keyboard me-2"></i>Data Masyarakat</a>
+                    @endif
                     @if (auth()->user()->level == "petugas")
                     <a href="/petugas/pengaduan" class="nav-item nav-link {{ e($__env->yieldContent('menu')) == 'pengaduan' ? 'active' : '' }}"><i class="fa fa-table me-2"></i>Pengaduan</a>
                     @endif
                     @if (auth()->user()->level == "masyarakat")
-                    <a href="/masyarakat/laporanku" class="nav-item nav-link {{ e($__env->yieldContent('menu')) == 'laporanku' ? 'active' : '' }}"><i class="fa fa-file me-2"></i>Laporan Saya</a>
+                    <a href="/masyarakat/laporanku" class="nav-item nav-link {{ e($__env->yieldContent('menu')) == 'laporanku' ? 'active' : '' }}"><i class="fa fa-file me-2"></i>Laporan</a>
                     @endif
                 </div>
             </nav>

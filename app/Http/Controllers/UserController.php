@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    // petugas index
     public function index(Request $request)
     {
         if($request) {
@@ -33,18 +34,21 @@ class UserController extends Controller
         return view('petugas.index', compact('petugas'));
     }
 
+    // petugas create
     public function create()
     {
         $provinces = Province::all();
         return view('petugas.create', compact('provinces'));
     }
 
+    // petugas detail
     public function show($id)
     {
         $petugas = User::where('nik',$id)->first();
         return view('petugas.show',compact('petugas'));
     }
 
+    // petugas pengaduan
     public function pengaduan()
     {
         return view('petugas.pengaduan.index');
@@ -93,6 +97,7 @@ class UserController extends Controller
         echo $option;
     }
 
+    // tambah petugas
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -131,5 +136,51 @@ class UserController extends Controller
         ]);
 
         return redirect('/petugas');
+    }
+
+    // index masyarakat
+    public function indexx(Request $request)
+    {
+        // $user = User::all();
+        // return view('user.index', compact('user'));
+
+        // if($request) {
+            // if($request->cari != ''){
+                // $user = User::whereColumn([
+                    // ['level', "<>","admin"],
+                    // ['level', "<>","petugas"]
+                // ])
+                // ->orWhere('level', "<>","admin")
+                // ->Where('level', "<>","petugas")
+                // ->get();
+            // }else{
+                // $user = User::Where('level', "<>","admin")
+                // ->get();
+            // }
+            // 
+        // }else{
+            // $user = User::all();
+        // }
+
+        $user = User::where('level', 'masyarakat')->get();
+        return view('user.index', compact('user'));
+    }
+
+    // detail masyarakat
+    public function showw($id)
+    {
+        $province = Province::all();
+        $district = District::all();
+        $regency = Regency::all();
+        $village = Village::all();
+        $user = User::where('id', $id)->first();
+        return view('user.show', compact('user','province','district','regency','village'));
+    }
+
+    // hapus masyarakat
+    public function delete($id)
+    {
+        User::where('id',$id)->delete();
+        return redirect('/user')->with('Data dihapus','Data berhasil dihapus!');
     }
 }

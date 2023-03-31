@@ -7,7 +7,7 @@ use App\Pengaduan;
 use App\Tanggapan;
 use App\User;
 use Carbon\Carbon;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class TanggapanController extends Controller
 {

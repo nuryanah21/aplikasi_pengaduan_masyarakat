@@ -1,4 +1,3 @@
-
 @section("menu","pengaduan")
 <!DOCTYPE html>
 <html lang="en">
@@ -111,7 +110,6 @@
                             </select>
                         </form>
                         </div>
-                        <br>
                         <div class="col-lg-4 col-md-6">
                             <div class="mt-3">
                                 <!-- Button trigger modal -->

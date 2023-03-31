@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Pengaduan;
 use App\Tanggapan;
+use App\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $jumlah_pengaduan = Pengaduan::all()->count();
-        $jumlah_tanggapan = Tanggapan::all()->count();
-
-        return view('halamandepan.dashboard')
-        ->with('jumlah_pengaduan', $jumlah_pengaduan)
-        ->with('jumlah_tanggapan', $jumlah_tanggapan);
+        return view('halamandepan.dashboard',[
+            'pengaduan' => Pengaduan::count(),
+            'petugas' => User::where('level','=', 'PETUGAS')->count(),
+            'masyarakat' => User::where('level','=', 'MASYARAKAT')->count(),
+            'tanggapan' => Tanggapan::count(),
+            'pending' => Pengaduan::where('status', '0')->count(),
+            'proses' => Pengaduan::where('status', 'Proses')->count(),
+            'selesai' => Pengaduan::where('status', 'Selesai')->count(),
+        ]);
     }
 }

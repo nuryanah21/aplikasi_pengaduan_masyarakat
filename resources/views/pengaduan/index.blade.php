@@ -74,7 +74,7 @@
                                 <br>
                                 <th>No</th>
                                 <th>Tanggal Pengaduan</th>
-                                <th>Nama</th>
+                                <th>Nama Pelapor</th>
                                 <th>Laporan</th>
                                 <th>Status</th>
                                 <th>OPSI</th>

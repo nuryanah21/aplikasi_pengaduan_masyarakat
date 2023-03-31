@@ -1,10 +1,10 @@
-@section("menu","laporanku")
+@section("menu","user")
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="utf-8">
-<title>Laporan | Pengaduan Masyarakat</title>
+<title>Masyarakat | Pengaduan Masyarakat</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -59,45 +59,47 @@
 
           <div class="container-fluid pt-4 px-4">
             <div class="col-12">
-              <h6 class="mb-4">Laporan Anda</h6>
-              <div class="bg-light rounded h-100 p-4">
-                  <!-- <a href="pengaduan/pdf" class="btn btn-primary rounded-pill m-2"><li class="fa fa-print"></li> Unduh Laporan</a> -->
-                  <div class="table-responsive">
-                      <table class="table" id="myTable" width="100%" ceelspacing="0">
-                          <thead>
-                              <tr>
-                                <br>
-                                <th>No</th>
-                                <th>Laporan</th>
-                                <th>Status</th>
-                                <th>OPSI</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            @foreach($pengaduan as $p)
-                              <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{ $p->isi_laporan }}</td>
-                                <td>
-                                    @if ($p->status == '0')
-                                    <a href="#" class="badge bg-primary">Pending</a>
-                                  @elseif ($p->status == 'proses')
-                                    <a href="#" class="badge bg-warning">Proses</a>
-                                  @else
-                                    <a href="#" class="badge bg-success">Selesai</a>
-                                  @endif
-                                </td>
-                                <td>
-                                    <a href="/masyarakat/laporanku/showlaporanku/{{ $p->id_pengaduan }}" class="btn btn-sm btn-square btn-warning m-2"><i class="fa fa-eye"></i></a>
-                                </td>
-                              </tr>
-                              @endforeach
-                          </tbody>
-                      </table>
-                  </div>
+              <h6 class="mb-4">Data Masyarakat</h6>
+              @if(session('Data dihapus'))
+              <div class="alert alert-danger" role="alert">
+                {{session('Data dihapus')}}
               </div>
+              @endif
+              <div class="bg-light rounded h-100 p-4">
+                    <!-- <a href="/petugas/pengaduan/pdf"  class="btn btn-primary mb-5"><i class='bx bxs-cloud-download'></i> Unduh Laporan</a> -->
+                    <div class="table-responsive">
+                        <table class="table" id="myTable" width="100%" ceelspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>NIK</th>
+                                    <th>Nama Masyarakat</th>
+                                    <th>Email</th>
+                                    <th>Telp</th>
+                                    <th>Alamat</th>
+                                    <th>OPSI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($user as $p)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $p->nik }}</td>
+                                    <td>{{ $p->nama}}</td>
+                                    <td>{{ $p->email }}</td>
+                                    <td>{{ $p->telp }}</td>
+                                    <td>{{$p->alamat}}</td>
+                                    <td>
+                                        <a href="/user/show/{{ $p->id }}" class="btn btn-sm btn-square btn-warning m-2"><i class="fa fa-eye"></i></a>
+                                        <a href="/user/delete/{{ $p->id }}" class="btn btn-sm btn-square btn-danger m-2" onClick="return confirm('Yakin ingin Hapus?')"><i class='fa fa-trash'></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
         <!-- Content End -->
 
 
